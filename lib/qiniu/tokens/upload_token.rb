@@ -10,7 +10,7 @@ module Qiniu
 
         include Utils
 
-        attr_accessor :scope, :expires_in, :callback_url, :callback_body_type, :customer, :escape, :async_options, :return_body
+        attr_accessor :scope, :expires_in, :callback_url, :callback_body_type, :customer, :escape, :async_options, :return_body, :return_url
 
         def initialize(opts = {})
           @scope = opts[:scope]
@@ -32,7 +32,8 @@ module Qiniu
           params[:escape] = 1 if @escape == 1 || @escape == true
           params[:asyncOps] = @async_options if !@async_options.nil? && !@async_options.empty?
           params[:returnBody] = @return_body if !@return_body.nil? && !@return_body.empty?
-          params[:returnUrl] = @reutrn_url if !@return_url.nil? && !@return_url.empty?
+          params[:returnUrl] = @return_url if !@return_url.nil? && !@return_url.empty?
+
           Utils.urlsafe_base64_encode(params.to_json)
         end
 
